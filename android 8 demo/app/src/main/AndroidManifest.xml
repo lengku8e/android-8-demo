@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sunhailong01.demo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".StartActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="com.jameschen.movie.ACTION_START_ACTIVITY" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".service.MediaPlaybackService" />
+
+        <!-- 监听SD卡 -->
+        <receiver android:name=".Mp3BroadCastReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.MEDIA_EJECT" />
+                <action android:name="android.intent.action.MEDIA_SCANNER_FINISHED" />
+
+                <data android:scheme="file" />
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="com.jameschen.movie.START" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".notificationchannels.NotificationActivity" />
+        <activity
+            android:name=".pictureinpicture.PiPActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true" />
+        <activity
+            android:name=".autofillframework.app.AutoActivity"
+            android:taskAffinity=".MainActivity" />
+        <activity
+            android:name=".autofillframework.app.StandardSignInActivity"
+            android:taskAffinity=".StandardSignInActivity" />
+        <activity
+            android:name=".autofillframework.app.StandardAutoCompleteSignInActivity"
+            android:taskAffinity=".StandardAutoCompleteSignInActivity" />
+        <activity
+            android:name=".autofillframework.app.VirtualSignInActivity"
+            android:taskAffinity=".VirtualSignInActivity" />
+        <activity android:name=".autofillframework.app.WelcomeActivity" />
+        <activity
+            android:name=".autofillframework.app.CreditCardActivity"
+            android:taskAffinity=".CreditCardActivity" />
+        <activity
+            android:name=".autofillframework.app.EmailComposeActivity"
+            android:taskAffinity=".EmailComposeActivity" />
+        <!--
+        Including launcher icon for Autofill Settings to convenience.
+        Not necessary for a real service.
+        -->
+        <activity
+            android:name=".autofillframework.multidatasetservice.settings.SettingsActivity"
+            android:exported="true"
+            android:label="@string/settings_name"
+            android:taskAffinity=".SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+        Declare AutofillService implementation; only needed for a small number of apps that will
+        be implementing an AutofillService. Framework parses meta-data and sets the service's
+        Settings Activity based on what the meta-data resource points to.
+        -->
+        <service
+            android:name=".autofillframework.multidatasetservice.MyAutofillService"
+            android:label="Multi-Dataset Autofill Service"
+            android:permission="android.permission.BIND_AUTOFILL">
+            <meta-data
+                android:name="android.autofill"
+                android:resource="@xml/multidataset_service" />
+
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".autofillframework.multidatasetservice.AuthActivity" />
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".Main22Activity"></activity>
+    </application>
+
+</manifest>
