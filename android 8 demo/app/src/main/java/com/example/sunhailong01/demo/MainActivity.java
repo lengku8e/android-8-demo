@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //要确保API Level 大于等于 25才可以创建动态shortcut，否则会报异常。

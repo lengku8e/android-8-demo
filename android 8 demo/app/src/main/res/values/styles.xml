@@ -46,5 +46,11 @@
         <item name="android:paddingBottom">@dimen/spacing_normal</item>
     </style>
 
+    <!--自定义启动闪屏页-->
+    <style name="splashTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/ic_autocomplete_logo_24dp</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 
 </resources>
